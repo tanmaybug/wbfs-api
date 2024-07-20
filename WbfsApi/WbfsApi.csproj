@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -15,8 +21,10 @@
     <Folder Include="Controllers\v1\directorate\" />
     <Folder Include="Controllers\v1\institution\" />
     <Folder Include="Controllers\v1\state\" />
-    <Folder Include="DAL\v1\" />
+    <Folder Include="DAL\v1\IRepository\" />
+    <Folder Include="DAL\v1\Repository\" />
     <Folder Include="DTO\v1\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
