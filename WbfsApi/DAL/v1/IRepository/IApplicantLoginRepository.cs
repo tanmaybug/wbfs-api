@@ -5,6 +5,6 @@ namespace WbfsApi.DAL.v1.IRepository
 {
     public interface IApplicantLoginRepository
     {
-        Task<List<WfsStakeUserLogin>> CheckUserData(string Username);
+        Task<WfsStakeUserLogin?> CheckUserData(string Username);
     }
 }

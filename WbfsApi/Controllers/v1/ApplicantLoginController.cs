@@ -16,10 +16,13 @@ namespace WbfsApi.Controllers.v1
         }
 
         [HttpPost("ApplicantLogin")]
-        public async Task<IActionResult> login([FromBody] ApplicantLoginRequestDTO loginData)
+        public async Task<IActionResult> Login([FromBody] ApplicantLoginRequestDTO loginData)
         {
             var userData = await _loginRepo.CheckUserData(loginData.Username);
-
+            if(userData == null)
+            {
+                return NotFound();
+            }
             return Ok(userData);
         }
     }
