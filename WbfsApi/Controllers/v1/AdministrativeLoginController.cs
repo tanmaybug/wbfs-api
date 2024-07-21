@@ -7,5 +7,13 @@ namespace WbfsApi.Controllers.v1
     [ApiController]
     public class AdministrativeLoginController : ControllerBase
     {
+        public AdministrativeLoginController() { 
+        }
+
+        [HttpGet("GetStakeLevel")]
+        public async Task<IActionResult> GetStakeLevel()
+        {
+            return BadRequest();
+        }
     }
 }

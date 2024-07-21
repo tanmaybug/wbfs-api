@@ -18,12 +18,25 @@ namespace WbfsApi.Controllers.v1
         [HttpPost("ApplicantLogin")]
         public async Task<IActionResult> Login([FromBody] ApplicantLoginRequestDTO loginData)
         {
-            var userData = await _loginRepo.CheckUserData(loginData.Username);
-            if(userData == null)
+            try
             {
-                return NotFound();
+                if(ModelState.IsValid) 
+                {
+                    var userData = await _loginRepo.CheckUserData(loginData.Username);
+                    if (userData == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(userData);
+                }else
+                {
+                    return BadRequest(ModelState);
+                }
             }
-            return Ok(userData);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
