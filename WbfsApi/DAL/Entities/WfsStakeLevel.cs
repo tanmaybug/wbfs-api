@@ -15,11 +15,11 @@ public partial class WfsStakeLevel
 
     [Column("stake_level_abbreviation")]
     [StringLength(255)]
-    public string? StakeLevelAbbreviation { get; set; }
+    public required string StakeLevelAbbreviation { get; set; }
 
     [Column("stake_level_description")]
     [StringLength(255)]
-    public string? StakeLevelDescription { get; set; }
+    public required string StakeLevelDescription { get; set; }
 
     [Column("stake_level_master_pass")]
     [StringLength(255)]

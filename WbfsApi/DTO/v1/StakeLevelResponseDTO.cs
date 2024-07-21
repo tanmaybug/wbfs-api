@@ -5,12 +5,12 @@ namespace WbfsApi.DTO.v1
     public class StakeLevelResponseDTO
     {
         [Required]
-        public required int Stakelevelid { get; set; }
+        public required long StakeLevelId { get; set; }
 
         [Required]
         public required string StakeLevelAbbreviation { get; set; }
 
         [Required]
-        public required string Stakeleveldescription { get; set; }
+        public required string StakeLevelDescription { get; set; }
     }
 }
