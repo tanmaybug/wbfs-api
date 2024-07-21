@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using WbfsApi.DAL.DBContext;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<WbfsDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("WbfsDbConnection")));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

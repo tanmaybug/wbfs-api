@@ -16,15 +16,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\v1\applicant\" />
-    <Folder Include="Controllers\v1\directorate\" />
-    <Folder Include="Controllers\v1\institution\" />
-    <Folder Include="Controllers\v1\state\" />
-    <Folder Include="DAL\v1\IRepository\" />
-    <Folder Include="DAL\v1\Repository\" />
-    <Folder Include="DTO\v1\" />
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
 </Project>
