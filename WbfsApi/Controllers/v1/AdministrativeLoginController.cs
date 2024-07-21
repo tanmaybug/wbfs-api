@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WbfsApi.DAL.v1.IRepository;
 using WbfsApi.DTO.v1;
+using WbfsApi.Helpers;
 
 namespace WbfsApi.Controllers.v1
 {
@@ -39,7 +40,14 @@ namespace WbfsApi.Controllers.v1
                     stakeResponse.Add(x);
                 }
 
-                return Ok(stakeResponse);
+                var FinalResponse = new APIResponse
+                {
+                    StatusCode = 200,
+                    ResponseMessage = "Stake Level Data",
+                    //ResponseData = stakeResponse
+                };
+
+                return Ok(FinalResponse);
             }catch (Exception ex)
             {
                 return BadRequest(ex.Message);
