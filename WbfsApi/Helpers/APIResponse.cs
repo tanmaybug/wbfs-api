@@ -1,9 +1,18 @@
 ﻿namespace WbfsApi.Helpers
 {
-    public class APIResponse
+    public class ApiResponse<T>
     {
-        public required int StatusCode;
-        public required String ResponseMessage;
-        //public required List<String> ResponseData;
+        public int StatusCode { get; set; }
+        public string ResponseMessage { get; set; }
+        public bool? ErrorStatus { get; set; }
+        public T? ResponseData { get; set; }
+
+        public ApiResponse(int statusCode, string message, bool? error, T? data)
+        {
+            StatusCode = statusCode;
+            ResponseMessage = message;
+            ErrorStatus = error;
+            ResponseData = data;
+        }
     }
 }

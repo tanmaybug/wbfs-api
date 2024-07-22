@@ -40,17 +40,15 @@ namespace WbfsApi.Controllers.v1
                     stakeResponse.Add(x);
                 }
 
-                var FinalResponse = new APIResponse
-                {
-                    StatusCode = 200,
-                    ResponseMessage = "Stake Level Data",
-                    //ResponseData = stakeResponse
-                };
+                var lst = new List<string> {  };
+
+                var FinalResponse = new ApiResponse<object>(200, "Stake Level Data",false, stakeResponse);
 
                 return Ok(FinalResponse);
+
             }catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new ApiResponse<object>(404, ex.Message, true, null));
             }
         }
 

@@ -10,10 +10,10 @@ namespace WbfsApi.Controllers.v1
         public ApplicantRegistrationController() { 
         }
 
-        [HttpGet("ApplicantRegistrationFormData")]
+        /*[HttpGet("ApplicantRegistrationFormData")]
         public Task<IActionResult> ApplicantRegistrationFormData()
         {
-            return BadRequest();
-        }
+            //return BadRequest();
+        }*/
     }
 }
