@@ -7,5 +7,13 @@ namespace WbfsApi.Controllers.v1
     [ApiController]
     public class ApplicantRegistrationController : ControllerBase
     {
+        public ApplicantRegistrationController() { 
+        }
+
+        [HttpGet("ApplicantRegistrationFormData")]
+        public Task<IActionResult> ApplicantRegistrationFormData()
+        {
+            return BadRequest();
+        }
     }
 }
