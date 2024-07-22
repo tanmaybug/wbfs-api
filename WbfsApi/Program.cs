@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using WbfsApi.DAL.DBContext;
 using WbfsApi.DAL.v1.IRepository;
 using WbfsApi.DAL.v1.Repository;
+using WbfsApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+/*app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Response.ContentType = "application/json";
+
+        var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+        if (contextFeature != null)
+        {
+            var errorResponse = new ApiResponse<string>(context.Response.StatusCode, "An unexpected error occurred", null);
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(errorResponse));
+        }
+    });
+});*/
 
 app.UseAuthorization();
 
