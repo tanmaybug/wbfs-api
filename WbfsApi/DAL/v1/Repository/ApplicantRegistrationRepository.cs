@@ -23,5 +23,38 @@ namespace WbfsApi.DAL.v1.Repository
             }
             return examData;
         }
+
+        public async Task<List<WfsTwelfthStdBoardMaster>?> GetWfsTwelfthStdBoards()
+        {
+            var boardData = await _dbContext.WfsTwelfthStdBoardMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
+
+            if (boardData == null)
+            {
+                return null;
+            }
+            return boardData;
+        }
+
+        public async Task<List<WfsCourseMaster>> GetCourseMasters()
+        {
+            var courseData = await _dbContext.WfsCourseMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
+
+            if (courseData == null)
+            {
+                return null;
+            }
+            return courseData;
+        }
+
+        public async Task<List<WfsDistrictMaster>?> GetDistrictMasters()
+        {
+            var distData = await _dbContext.WfsDistrictMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
+
+            if (distData == null)
+            {
+                return null;
+            }
+            return distData;
+        }
     }
 }
