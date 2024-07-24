@@ -6,9 +6,9 @@ namespace WbfsApi.DAL.v1.IRepository
     {
         Task<List<WfsQualifyingExamMaster>?> GetQualifyingExams();
 
-        Task<List<WfsTwelfthStdBoardMaster>?> GetWfsTwelfthStdBoards();
+        Task<List<WfsTwelfthStdBoardMaster>?> GetTwelfthStdBoards();
 
-        Task<List<WfsCourseMaster>> GetCourseMasters();
+        Task<List<WfsCourseMaster>?> GetCourseMasters();
 
         Task<List<WfsDistrictMaster>?> GetDistrictMasters();
     }

@@ -14,6 +14,7 @@ builder.Services.AddDbContext<WbfsDBContext>(options => options.UseNpgsql(builde
 
 builder.Services.AddTransient<IApplicantLoginRepository, ApplicantLoginRepository>();
 builder.Services.AddTransient<IAdminLoginRepository, AdminLoginRepository>();
+builder.Services.AddTransient<IApplicantRegistrationRepository, ApplicantRegistrationRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -24,7 +24,7 @@ namespace WbfsApi.DAL.v1.Repository
             return examData;
         }
 
-        public async Task<List<WfsTwelfthStdBoardMaster>?> GetWfsTwelfthStdBoards()
+        public async Task<List<WfsTwelfthStdBoardMaster>?> GetTwelfthStdBoards()
         {
             var boardData = await _dbContext.WfsTwelfthStdBoardMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
 
@@ -35,7 +35,7 @@ namespace WbfsApi.DAL.v1.Repository
             return boardData;
         }
 
-        public async Task<List<WfsCourseMaster>> GetCourseMasters()
+        public async Task<List<WfsCourseMaster>?> GetCourseMasters()
         {
             var courseData = await _dbContext.WfsCourseMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
 
