@@ -14,7 +14,7 @@ public partial class WfsQualifyingExamMaster
     public long QualifyingExamIdPk { get; set; }
 
     [Column("qualifying_exam_name")]
-    public string? QualifyingExamName { get; set; }
+    public required string QualifyingExamName { get; set; }
 
     [Column("active_status")]
     public short ActiveStatus { get; set; }
