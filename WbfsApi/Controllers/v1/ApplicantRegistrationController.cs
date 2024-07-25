@@ -44,11 +44,65 @@ namespace WbfsApi.Controllers.v1
                     examResponse = null;
                 }
 
+                var twelfthResponse = new List<TwelfthStdBoardResponseDTO>();
+                if (TwelfthStdBoards != null)
+                {
+                    foreach (var board in TwelfthStdBoards)
+                    {
+                        var x = new TwelfthStdBoardResponseDTO
+                        {
+                            BoardId = board.BoardIdPk,
+                            BoardName = board.BoardName
+                        };
+                        twelfthResponse.Add(x);
+                    }
+                }
+                else
+                {
+                    twelfthResponse = null;
+                }
+
+                var courseResponse = new List<CourseResponseDTO>();
+                if (CourseMasters != null)
+                {
+                    foreach (var course in CourseMasters)
+                    {
+                        var x = new CourseResponseDTO
+                        {
+                            CourseId = course.CourseIdPk,
+                            CourseName = course.CourseName
+                        };
+                        courseResponse.Add(x);
+                    }
+                }
+                else
+                {
+                    courseResponse = null;
+                }
+
+                var districtResponse = new List<DistrictResponseDTO>();
+                if (DistrictMasters != null)
+                {
+                    foreach (var dist in DistrictMasters)
+                    {
+                        var x = new DistrictResponseDTO
+                        {
+                            DistrictId = dist.DistrictIdPk,
+                            DistrictName = dist.DistrictName
+                        };
+                        districtResponse.Add(x);
+                    }
+                }
+                else
+                {
+                    districtResponse = null;
+                }
+
                 Dictionary<string, object?> myRes = [];
                 myRes["QualifyingExams"] = examResponse;
-                myRes["TwelfthStdBoards"] = TwelfthStdBoards;
-                myRes["CourseMasters"] = CourseMasters;
-                myRes["DistrictMasters"] = DistrictMasters;
+                myRes["TwelfthStdBoards"] = twelfthResponse;
+                myRes["CourseMasters"] = courseResponse;
+                myRes["DistrictMasters"] = districtResponse;
 
                 var FinalResponse = new ApiResponse<object>
                 {
