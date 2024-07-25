@@ -101,8 +101,8 @@ namespace WbfsApi.Controllers.v1
                 Dictionary<string, object?> myRes = [];
                 myRes["QualifyingExams"] = examResponse;
                 myRes["TwelfthStdBoards"] = twelfthResponse;
-                myRes["CourseMasters"] = courseResponse;
-                myRes["DistrictMasters"] = districtResponse;
+                myRes["Course"] = courseResponse;
+                myRes["District"] = districtResponse;
 
                 var FinalResponse = new ApiResponse<object>
                 {
@@ -124,5 +124,25 @@ namespace WbfsApi.Controllers.v1
                 });
             }
         }
+
+
+        [HttpPost("ApplicationRegistrationSubmit")]
+        public async Task<IActionResult> ApplicationRegistrationSubmit([FromBody] ApplicationRegistrationRequestDTO RequestFromData)
+        {
+            try
+            {
+                return Ok(RequestFromData);
+            }catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    StatusCode = 404,
+                    ResponseMessage = ex.Message,
+                    ErrorStatus = true,
+                    ResponseData = null
+                });
+            }
+        }
+
     }
 }
