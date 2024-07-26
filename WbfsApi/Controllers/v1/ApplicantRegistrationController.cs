@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using WbfsApi.DAL.Entities;
 using WbfsApi.DAL.v1.IRepository;
 using WbfsApi.DTO.v1;
@@ -134,8 +135,10 @@ namespace WbfsApi.Controllers.v1
             {
                 if (ModelState.IsValid) 
                 {
+                    String ApplicantID = "WBFS123";
+
                     var ApplicantData = new WfsApplicationDetail{
-                        WfsRegistrationNo = "WBFS123",
+                        WfsRegistrationNo = ApplicantID,
                         ApplicantFname = RequestFromData.FirstName,
                         ApplicantMname = RequestFromData.MiddleName,
                         ApplicantLname = RequestFromData.LastName,
@@ -158,8 +161,22 @@ namespace WbfsApi.Controllers.v1
                         TwlfthStdRollNo = RequestFromData.TwelfthRoll,
                         TenthStdPassingYear = RequestFromData.TenthExamYear
                     };
-                    
-                    
+
+                    var LoginData = new WfsStakeUserLogin
+                    {
+                        StakeLevelIdFk = 7,
+                        StakeUser = ApplicantID,
+                        StakePassword = "1234",
+                        ActiveStatus = 1
+                    };
+
+                    var TrackData = new WfsApplicationTrackHistory
+                    {
+                        WfsRegistrationIdFk = ApplicantID,
+                        StakeLevelIdFk = 7,
+                        TrackStatus = 4
+                    };
+
                     var x = await _applicantRegRepo.RegistrationSubmit(RequestFromData);
                     return Ok(RequestFromData);
                 }
