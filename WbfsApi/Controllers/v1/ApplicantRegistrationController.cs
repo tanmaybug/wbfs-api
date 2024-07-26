@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WbfsApi.DAL.Entities;
 using WbfsApi.DAL.v1.IRepository;
 using WbfsApi.DTO.v1;
 using WbfsApi.Helpers;
@@ -133,6 +134,32 @@ namespace WbfsApi.Controllers.v1
             {
                 if (ModelState.IsValid) 
                 {
+                    var ApplicantData = new WfsApplicationDetail{
+                        WfsRegistrationNo = "WBFS123",
+                        ApplicantFname = RequestFromData.FirstName,
+                        ApplicantMname = RequestFromData.MiddleName,
+                        ApplicantLname = RequestFromData.LastName,
+                        MobileNo = RequestFromData.MobileNumber,
+                        EmailId = RequestFromData.EmailId,
+                        TenthStdRollNo = RequestFromData.TenthRoll,
+                        QualifyingExamName = RequestFromData.EntranceExam,
+                        YearOfQualifyingExam = RequestFromData.EntranceExamYear,
+                        PresentCourseName = RequestFromData.Course,
+                        PresentCourseDiscipline = RequestFromData.Discipline,
+                        PresentCourseDuration = RequestFromData.CourseDuration,
+                        DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
+                        PresentInstitutionName = RequestFromData.Institution,
+                        InstitutionDistrictIdFk = RequestFromData.InstDistrict,
+                        UniversityRegistrationNo = RequestFromData.UnivRegNo,
+                        TwlfthPassingYear = RequestFromData.TwelfthExamYear,
+                        TotalMarksObtainInTwlfthExam = RequestFromData.TwelfthObtainedMarks,
+                        TotalMarksOfTwlfthExam = RequestFromData.TwelfthTotalMarks,
+                        PercentageOfTwlfthExam = RequestFromData.TwelfthPercentage,
+                        TwlfthStdRollNo = RequestFromData.TwelfthRoll,
+                        TenthStdPassingYear = RequestFromData.TenthExamYear
+                    };
+                    
+                    
                     var x = await _applicantRegRepo.RegistrationSubmit(RequestFromData);
                     return Ok(RequestFromData);
                 }
