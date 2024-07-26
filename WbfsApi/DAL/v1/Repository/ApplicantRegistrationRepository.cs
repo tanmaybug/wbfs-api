@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using WbfsApi.DAL.DBContext;
 using WbfsApi.DAL.Entities;
 using WbfsApi.DAL.v1.IRepository;
+using WbfsApi.DTO.v1;
 
 namespace WbfsApi.DAL.v1.Repository
 {
@@ -55,6 +56,12 @@ namespace WbfsApi.DAL.v1.Repository
                 return null;
             }
             return distData;
+        }
+
+        public async Task<string> RegistrationSubmit(ApplicationRegistrationRequestDTO RequestFromData)
+        {
+            var distData = await _dbContext.WfsDistrictMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
+            return "Success";
         }
     }
 }

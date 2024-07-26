@@ -131,7 +131,21 @@ namespace WbfsApi.Controllers.v1
         {
             try
             {
-                return Ok(RequestFromData);
+                if (ModelState.IsValid) 
+                {
+                    var x = await _applicantRegRepo.RegistrationSubmit(RequestFromData);
+                    return Ok(RequestFromData);
+                }
+                else
+                {
+                    return BadRequest(new ApiResponse<string>
+                    {
+                        StatusCode = 404,
+                        ResponseMessage = "Please Enter Valida Data",
+                        ErrorStatus = true,
+                        ResponseData = null
+                    });
+                }
             }catch (Exception ex)
             {
                 return BadRequest(new ApiResponse<string>
