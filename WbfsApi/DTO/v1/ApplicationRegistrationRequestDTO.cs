@@ -8,7 +8,7 @@ namespace WbfsApi.DTO.v1
         public required String UnivRegNo { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-z ]+$",ErrorMessage = "First Name of Candidate can consist of alphabetical characters and spaces only")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "First Name of Candidate can consist of alphabetical characters and spaces only")]
         public required String FirstName { get; set; }
         
         public String? MiddleName { get; set; }
@@ -20,7 +20,7 @@ namespace WbfsApi.DTO.v1
         public required long MobileNumber { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$",ErrorMessage ="Invalid Email ID")]
+        [RegularExpression(@"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", ErrorMessage ="Invalid Email ID")]
         public required String EmailId { get; set; }
         [Required]
         public required short EntranceExam { get; set; }

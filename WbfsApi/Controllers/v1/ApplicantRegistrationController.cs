@@ -127,15 +127,25 @@ namespace WbfsApi.Controllers.v1
             }
         }
 
-
+        [HttpGet("TestRequest")]
+        public IActionResult TestRequest()
+        {
+            String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmssf");
+            String Password = new PasswordGenerator().GenerateRandomPassword();
+            string EnPassword = new CustomEncryption().Encrypt(Password);
+            string DePassword = new CustomEncryption().Decrypt(EnPassword);
+            return Ok(new { ApplicantID, Password, EnPassword, DePassword });
+        }
+        
         [HttpPost("ApplicationRegistrationSubmit")]
         public async Task<IActionResult> ApplicationRegistrationSubmit([FromBody] ApplicationRegistrationRequestDTO RequestFromData)
         {
             try
             {
-                if (ModelState.IsValid) 
+                if (true) //ModelState.IsValid
                 {
-                    String ApplicantID = "WBFS123";
+                    String ApplicantID = "WBFS"+ DateTime.Now.ToString("yyyyMMddHHmmss");
+                    String Password = new PasswordGenerator().GenerateRandomPassword();
 
                     var ApplicantData = new WfsApplicationDetail{
                         WfsRegistrationNo = ApplicantID,
@@ -166,7 +176,7 @@ namespace WbfsApi.Controllers.v1
                     {
                         StakeLevelIdFk = 7,
                         StakeUser = ApplicantID,
-                        StakePassword = "1234",
+                        StakePassword = Password,
                         ActiveStatus = 1
                     };
 
@@ -177,8 +187,8 @@ namespace WbfsApi.Controllers.v1
                         TrackStatus = 4
                     };
 
-                    var x = await _applicantRegRepo.RegistrationSubmit(RequestFromData);
-                    return Ok(RequestFromData);
+                    var x = await _applicantRegRepo.RegistrationSubmit(ApplicantData, LoginData, TrackData);
+                    return Ok(ApplicantData);
                 }
                 else
                 {

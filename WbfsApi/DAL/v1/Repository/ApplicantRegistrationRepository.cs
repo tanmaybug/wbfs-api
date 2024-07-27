@@ -58,10 +58,21 @@ namespace WbfsApi.DAL.v1.Repository
             return distData;
         }
 
-        public async Task<string> RegistrationSubmit(ApplicationRegistrationRequestDTO RequestFromData)
+        public async Task<string> RegistrationSubmit(WfsApplicationDetail ApplicantData, WfsStakeUserLogin LoginData, WfsApplicationTrackHistory TrackData)
         {
-            var distData = await _dbContext.WfsDistrictMasters.Where(p => p.ActiveStatus == 1).ToListAsync();
-            return "Success";
+            try
+            {
+                await _dbContext.WfsApplicationDetails.AddAsync(ApplicantData);
+                await _dbContext.WfsStakeUserLogins.AddAsync(LoginData);
+                await _dbContext.WfsApplicationTrackHistories.AddAsync(TrackData);
+                _dbContext.SaveChanges();
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
