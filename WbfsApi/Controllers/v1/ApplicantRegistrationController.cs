@@ -197,6 +197,28 @@ namespace WbfsApi.Controllers.v1
                     };
 
                     var x = await _applicantRegRepo.RegistrationSubmit(ApplicantData, LoginData, TrackData);
+                    if (x == null)
+                    {
+                        return BadRequest(new ApiResponse<string>
+                        {
+                            StatusCode = 400,
+                            ResponseMessage = "Please Try Again",
+                            ErrorStatus = true,
+                            ResponseData = null
+                        });
+                    }
+
+                    Dictionary<string, object?> myRes = [];
+                    myRes["ApplicationID"] = ApplicantID;
+
+                    var FinalResponse = new ApiResponse<object>
+                    {
+                        StatusCode = 200,
+                        ResponseMessage = "Applicant Has Been Registered Successfully",
+                        ErrorStatus = false,
+                        ResponseData = myRes
+                    };
+
                     return Ok(ApplicantData);
                 }
                 else
