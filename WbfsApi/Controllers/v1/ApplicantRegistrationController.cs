@@ -193,7 +193,9 @@ namespace WbfsApi.Controllers.v1
                     {
                         WfsRegistrationIdFk = ApplicantID,
                         StakeLevelIdFk = 7,
-                        TrackStatus = 4
+                        TrackStatus = 4,
+                        TrackIp = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                        TrackTime = new DateTime()
                     };
 
                     var x = await _applicantRegRepo.RegistrationSubmit(ApplicantData, LoginData, TrackData);
@@ -219,7 +221,7 @@ namespace WbfsApi.Controllers.v1
                         ResponseData = myRes
                     };
 
-                    return Ok(ApplicantData);
+                    return Ok(FinalResponse);
                 }
                 else
                 {
