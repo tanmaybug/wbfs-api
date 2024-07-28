@@ -19,6 +19,8 @@ namespace WbfsApi.Controllers.v1
         }
 
         [HttpGet("ApplicantRegistrationFormData")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ApplicantRegistrationFormData()
         {
             try
@@ -134,7 +136,14 @@ namespace WbfsApi.Controllers.v1
             String Password = new PasswordGenerator().GenerateRandomPassword();
             string EnPassword = new CustomEncryption().Encrypt(Password);
             string DePassword = new CustomEncryption().Decrypt(EnPassword);
-            return Ok(new { ApplicantID, Password, EnPassword, DePassword });
+            string hashPassword = new CustomHashing().CreateHash(Password);
+            bool vStat = new CustomHashing().VerifyHash(Password, hashPassword);
+
+            string xh = new CustomHashing().CreateHash("1234");
+            string yh = new CustomHashing().CreateHash("1234");
+
+
+            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh});
         }
         
         [HttpPost("ApplicationRegistrationSubmit")]
@@ -142,7 +151,7 @@ namespace WbfsApi.Controllers.v1
         {
             try
             {
-                if (true) //ModelState.IsValid
+                if (ModelState.IsValid)
                 {
                     String ApplicantID = "WBFS"+ DateTime.Now.ToString("yyyyMMddHHmmss");
                     String Password = new PasswordGenerator().GenerateRandomPassword();
@@ -176,7 +185,7 @@ namespace WbfsApi.Controllers.v1
                     {
                         StakeLevelIdFk = 7,
                         StakeUser = ApplicantID,
-                        StakePassword = Password,
+                        StakePassword = new CustomHashing().CreateHash(Password),
                         ActiveStatus = 1
                     };
 

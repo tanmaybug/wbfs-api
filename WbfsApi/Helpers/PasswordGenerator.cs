@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BCrypt.Net;
+using System.Text;
 
 namespace WbfsApi.Helpers
 {
