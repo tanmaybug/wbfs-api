@@ -12,9 +12,9 @@ namespace WbfsApi.Helpers
 
         public string GenerateRandomPassword()
         {
-            int Charlength = 4;
-            int Numlength = 3;
-            int symlength = 2;
+            int Charlength = 4; // Number Of Characters
+            int Numlength = 3;  // Number Of Numbers
+            int symlength = 2;  // Number Of Symbols
             StringBuilder password = new();
             Random random = new();
 
