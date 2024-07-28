@@ -169,7 +169,7 @@ namespace WbfsApi.Controllers.v1
                         PresentCourseName = RequestFromData.Course,
                         PresentCourseDiscipline = RequestFromData.Discipline,
                         PresentCourseDuration = RequestFromData.CourseDuration,
-                        DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
+                        //DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
                         PresentInstitutionName = RequestFromData.Institution,
                         InstitutionDistrictIdFk = RequestFromData.InstDistrict,
                         UniversityRegistrationNo = RequestFromData.UnivRegNo,
