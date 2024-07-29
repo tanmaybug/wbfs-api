@@ -58,6 +58,17 @@ namespace WbfsApi.DAL.v1.Repository
             return distData;
         }
 
+        public async Task<bool> GetUniqueApplicantId(String ApplicantId)
+        {
+            var distData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
+
+            if (distData == null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public async Task<string> RegistrationSubmit(WfsApplicationDetail ApplicantData, WfsStakeUserLogin LoginData, WfsApplicationTrackHistory TrackData)
         {
             try

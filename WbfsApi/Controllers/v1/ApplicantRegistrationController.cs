@@ -142,8 +142,9 @@ namespace WbfsApi.Controllers.v1
             string xh = new CustomHashing().CreateHash("1234");
             string yh = new CustomHashing().CreateHash("1234");
 
+            string x = GetUniqueApplicantId();
 
-            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh});
+            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh,x});
         }
         
         [HttpPost("ApplicationRegistrationSubmit")]
@@ -153,7 +154,7 @@ namespace WbfsApi.Controllers.v1
             {
                 if (ModelState.IsValid)
                 {
-                    String ApplicantID = "WBFS"+ DateTime.Now.ToString("yyyyMMddHHmmss");
+                    String ApplicantID = GetUniqueApplicantId();
                     String Password = new PasswordGenerator().GenerateRandomPassword();
 
                     var ApplicantData = new WfsApplicationDetail{
@@ -245,5 +246,21 @@ namespace WbfsApi.Controllers.v1
             }
         }
 
+
+        [HttpGet("GetUniqueApplicantId")]
+        public String GetUniqueApplicantId()
+        {
+            String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+            var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
+            if (x)
+            {
+                return ApplicantID;
+            }
+            else
+            {
+                return GetUniqueApplicantId();
+            }
+        }
     }
 }

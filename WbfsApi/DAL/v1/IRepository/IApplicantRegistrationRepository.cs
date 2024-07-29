@@ -13,6 +13,8 @@ namespace WbfsApi.DAL.v1.IRepository
 
         Task<List<WfsDistrictMaster>?> GetDistrictMasters();
 
+        bool GetUniqueApplicantId(String ApplicantId);
+
         Task<string> RegistrationSubmit(WfsApplicationDetail ApplicantData, WfsStakeUserLogin LoginData, WfsApplicationTrackHistory TrackData);
     }
 }
