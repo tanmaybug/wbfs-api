@@ -253,7 +253,7 @@ namespace WbfsApi.Controllers.v1
             String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
 
             var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
-            if (x)
+            if (x != null)
             {
                 return ApplicantID;
             }
