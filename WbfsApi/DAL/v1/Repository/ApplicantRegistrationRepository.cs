@@ -60,13 +60,10 @@ namespace WbfsApi.DAL.v1.Repository
 
         public async Task<string?> GetUniqueApplicantId(String ApplicantId)
         {
-            var appIdData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
+            //var appIdData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
+            var appIdData = await _dbContext.WfsApplicationDetails.Where(p => p.WfsRegistrationNo == ApplicantId).ToListAsync();
 
-            if (appIdData == null)
-            {
-                return ApplicantId;
-            }
-            return null;
+            return appIdData?[0].WfsRegistrationNo;
         }
 
         public async Task<string> RegistrationSubmit(WfsApplicationDetail ApplicantData, WfsStakeUserLogin LoginData, WfsApplicationTrackHistory TrackData)

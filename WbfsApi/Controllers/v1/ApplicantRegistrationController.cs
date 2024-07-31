@@ -250,16 +250,18 @@ namespace WbfsApi.Controllers.v1
         [HttpGet("GetUniqueApplicantId")]
         public String GetUniqueApplicantId()
         {
-            String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            //String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            String ApplicantID = "WFS18155135714312";
 
             var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
-            if (x != null)
+
+            if (x == null)
             {
-                return ApplicantID;
+                return "ApplicantID";
             }
             else
             {
-                return GetUniqueApplicantId();
+                return "Duplicate ID";
             }
         }
     }
