@@ -144,7 +144,10 @@ namespace WbfsApi.Controllers.v1
 
             string x = GetUniqueApplicantId();
 
-            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh,x});
+            var date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var datex = DateOnly.Parse(date);
+
+            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh,x, date, datex });
         }
         
         [HttpPost("ApplicationRegistrationSubmit")]
@@ -170,7 +173,7 @@ namespace WbfsApi.Controllers.v1
                         PresentCourseName = RequestFromData.Course,
                         PresentCourseDiscipline = RequestFromData.Discipline,
                         PresentCourseDuration = RequestFromData.CourseDuration,
-                        //DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
+                        DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
                         PresentInstitutionName = RequestFromData.Institution,
                         InstitutionDistrictIdFk = RequestFromData.InstDistrict,
                         UniversityRegistrationNo = RequestFromData.UnivRegNo,
@@ -196,7 +199,7 @@ namespace WbfsApi.Controllers.v1
                         StakeLevelIdFk = 7,
                         TrackStatus = 4,
                         TrackIp = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                        TrackTime = new DateTime()
+                        TrackTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                     };
 
                     var x = await _applicantRegRepo.RegistrationSubmit(ApplicantData, LoginData, TrackData);
@@ -251,16 +254,18 @@ namespace WbfsApi.Controllers.v1
         public String GetUniqueApplicantId()
         {
             String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
-            if (x)
+            //String ApplicantID = "WBFS20240728213341";
+            return ApplicantID;
+            /*var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
+            if (x != null)
             {
                 return ApplicantID;
             }
             else
             {
-                return GetUniqueApplicantId();
-            }
+                //return GetUniqueApplicantId();
+                return "Duplicate ID";
+            }*/
         }
     }
 }
