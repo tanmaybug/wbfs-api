@@ -144,7 +144,9 @@ namespace WbfsApi.Controllers.v1
 
             string x = GetUniqueApplicantId();
 
-            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh,x});
+            var date = new DateOnly(2022, 1, 1);
+
+            return Ok(new { ApplicantID, Password, EnPassword, DePassword , hashPassword , vStat , xh ,yh,x, date });
         }
         
         [HttpPost("ApplicationRegistrationSubmit")]
@@ -170,7 +172,7 @@ namespace WbfsApi.Controllers.v1
                         PresentCourseName = RequestFromData.Course,
                         PresentCourseDiscipline = RequestFromData.Discipline,
                         PresentCourseDuration = RequestFromData.CourseDuration,
-                        //DateOfAdmissionInPresentCourse = RequestFromData.DateOfAdmission,
+                        DateOfAdmissionInPresentCourse = DateOnly.Parse(RequestFromData.DateOfAdmission),
                         PresentInstitutionName = RequestFromData.Institution,
                         InstitutionDistrictIdFk = RequestFromData.InstDistrict,
                         UniversityRegistrationNo = RequestFromData.UnivRegNo,
@@ -179,7 +181,9 @@ namespace WbfsApi.Controllers.v1
                         TotalMarksOfTwlfthExam = RequestFromData.TwelfthTotalMarks,
                         PercentageOfTwlfthExam = RequestFromData.TwelfthPercentage,
                         TwlfthStdRollNo = RequestFromData.TwelfthRoll,
-                        TenthStdPassingYear = RequestFromData.TenthExamYear
+                        TenthStdPassingYear = RequestFromData.TenthExamYear,
+                        EntryTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff")),
+                        EntryIp = HttpContext.Connection.RemoteIpAddress?.ToString()
                     };
 
                     var LoginData = new WfsStakeUserLogin
@@ -196,8 +200,10 @@ namespace WbfsApi.Controllers.v1
                         StakeLevelIdFk = 7,
                         TrackStatus = 4,
                         TrackIp = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                        TrackTime = new DateTime()
+                        TrackTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff"))
                     };
+
+                    //return Ok(new { ApplicantData, LoginData,TrackData });
 
                     var x = await _applicantRegRepo.RegistrationSubmit(ApplicantData, LoginData, TrackData);
                     if (x == null)
@@ -213,6 +219,7 @@ namespace WbfsApi.Controllers.v1
 
                     Dictionary<string, object?> myRes = [];
                     myRes["ApplicationID"] = ApplicantID;
+                    myRes["Password"] = Password;
 
                     var FinalResponse = new ApiResponse<object>
                     {
@@ -250,8 +257,11 @@ namespace WbfsApi.Controllers.v1
         [HttpGet("GetUniqueApplicantId")]
         public String GetUniqueApplicantId()
         {
-            //String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            String ApplicantID = "WFS18155135714312";
+            String ApplicantID = "WBFS" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+            return ApplicantID;
+
+            /*String ApplicantID = "WFS18155135714312";
 
             var x = _applicantRegRepo.GetUniqueApplicantId(ApplicantID);
 
@@ -262,7 +272,7 @@ namespace WbfsApi.Controllers.v1
             else
             {
                 return "Duplicate ID";
-            }
+            }*/
         }
     }
 }
