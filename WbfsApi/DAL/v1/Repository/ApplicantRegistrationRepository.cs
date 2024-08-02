@@ -60,7 +60,6 @@ namespace WbfsApi.DAL.v1.Repository
 
         public async Task<string?> GetUniqueApplicantId(String ApplicantId)
         {
-<<<<<<< HEAD
             var appData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
 
             if (appData == null)
@@ -68,12 +67,11 @@ namespace WbfsApi.DAL.v1.Repository
                 return ApplicantId;
             }
             return null;
-=======
-            //var appIdData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
-            var appIdData = await _dbContext.WfsApplicationDetails.Where(p => p.WfsRegistrationNo == ApplicantId).ToListAsync();
 
-            return appIdData?[0].WfsRegistrationNo;
->>>>>>> c33594e255d13c607e19a1811898dd9886c297ce
+            //var appIdData = await _dbContext.WfsApplicationDetails.FirstOrDefaultAsync(p => p.WfsRegistrationNo == ApplicantId);
+            //var appIdData = await _dbContext.WfsApplicationDetails.Where(p => p.WfsRegistrationNo == ApplicantId).ToListAsync();
+
+            //return appIdData?[0].WfsRegistrationNo;
         }
 
         public async Task<string> RegistrationSubmit(WfsApplicationDetail ApplicantData, WfsStakeUserLogin LoginData, WfsApplicationTrackHistory TrackData)

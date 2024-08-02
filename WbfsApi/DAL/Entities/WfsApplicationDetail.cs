@@ -47,7 +47,7 @@ public partial class WfsApplicationDetail
     public short? PresentCourseDuration { get; set; }
 
     [Column("date_of_admission_in_present_course")]
-    public DateOnly? DateOfAdmissionInPresentCourse { get; set; }
+    public DateOnly DateOfAdmissionInPresentCourse { get; set; }
 
     [Column("present_institution_name")]
     public short? PresentInstitutionName { get; set; }
