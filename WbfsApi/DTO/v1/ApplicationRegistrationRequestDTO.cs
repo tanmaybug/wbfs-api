@@ -61,7 +61,7 @@ namespace WbfsApi.DTO.v1
         [Required]
         public required short CourseDuration { get; set; }
         [Required]
-        public required String DateOfAdmission { get; set; }
+        public required DateOnly DateOfAdmission { get; set; }
         [Required]
         public required int InstDistrict { get; set; }
         [Required]
