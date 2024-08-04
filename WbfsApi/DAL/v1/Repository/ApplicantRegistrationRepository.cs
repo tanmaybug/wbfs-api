@@ -80,7 +80,7 @@ namespace WbfsApi.DAL.v1.Repository
             return await CheckAndGenerateUniqueIdAsync(newId);
         }
 
-        private static async Task<String> CheckAndGenerateUniqueIdAsync(String id)
+        public async Task<String> CheckAndGenerateUniqueIdAsync(String id)
         {
             bool exists = await _dbContext.WfsApplicationDetails.AnyAsync(p => p.WfsRegistrationNo == id);
             if (exists)

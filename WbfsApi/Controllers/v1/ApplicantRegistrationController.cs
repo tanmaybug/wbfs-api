@@ -159,8 +159,6 @@ namespace WbfsApi.Controllers.v1
                 {
                     String ApplicantID = await _applicantRegRepo.GetUniqueApplicantId();
 
-
-                    //String ApplicantID = GetUniqueApplicantId();
                     String Password = new PasswordGenerator().GenerateRandomPassword();
 
                     var ApplicantData = new WfsApplicationDetail{
