@@ -17,30 +17,44 @@ namespace WbfsApi.Controllers.v1.applicant
         }
 
         [HttpGet]
-        public IActionResult ApplicantDashboard()
+        public async Task<IActionResult> ApplicantDashboard()
         {
-            Dictionary<string, object?> myRes = [];
-            myRes["ApplicationID"] = ApplicantID;
-            myRes["ApplicationName"] = "Tanmay";
-            myRes["Status"] = "Registration Done";
-
-            Dictionary<string, string?> Activityinfo = [];
-            Activityinfo["ApplicantRegistration"] = "01-01-2024";
-            Activityinfo["ApplicationFormFillup"] = "01-01-2024";
-            Activityinfo["UploadSupportingDocument"] = null;
-            Activityinfo["FinalSubmissionofApplication"] = null;
-
-            myRes["Activity"] = Activityinfo;
-
-            var FinalResponse = new ApiResponse<object>
+            try
             {
-                StatusCode = 200,
-                ResponseMessage = "Applicant Dashboard Data",
-                ErrorStatus = false,
-                ResponseData = myRes
-            };
+                var applicantData = await _dashboardRepo.GetApplicantDetails(ApplicantID);
 
-            return Ok(FinalResponse);
+                Dictionary<string, object?> myRes = [];
+                myRes["ApplicationID"] = ApplicantID;
+                myRes["ApplicationName"] = applicantData?.ApplicantFname;
+                myRes["Status"] = "Registration Done";
+
+                Dictionary<string, string?> Activityinfo = [];
+                Activityinfo["ApplicantRegistration"] = "01-01-2024";
+                Activityinfo["ApplicationFormFillup"] = "01-01-2024";
+                Activityinfo["UploadSupportingDocument"] = null;
+                Activityinfo["FinalSubmissionofApplication"] = null;
+
+                myRes["Activity"] = Activityinfo;
+
+                var FinalResponse = new ApiResponse<object>
+                {
+                    StatusCode = 200,
+                    ResponseMessage = "Applicant Dashboard Data",
+                    ErrorStatus = false,
+                    ResponseData = myRes
+                };
+
+                return Ok(FinalResponse);
+            }catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    StatusCode = 404,
+                    ResponseMessage = ex.Message,
+                    ErrorStatus = true,
+                    ResponseData = null
+                });
+            }
         }
 
     }
