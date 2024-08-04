@@ -8,6 +8,8 @@ using WbfsApi.DAL.v1.Repository;
 using WbfsApi.Helpers;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using WbfsApi.DAL.v1.IRepository.applicant;
+using WbfsApi.DAL.v1.Repository.applicant;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ builder.Services.AddDbContext<WbfsDBContext>(options => options.UseNpgsql(builde
 builder.Services.AddTransient<IApplicantLoginRepository, ApplicantLoginRepository>();
 builder.Services.AddTransient<IAdminLoginRepository, AdminLoginRepository>();
 builder.Services.AddTransient<IApplicantRegistrationRepository, ApplicantRegistrationRepository>();
+builder.Services.AddTransient<IDashboardRepository, DashboardRepository>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(opt =>
