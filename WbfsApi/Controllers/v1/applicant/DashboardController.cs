@@ -22,8 +22,11 @@ namespace WbfsApi.Controllers.v1.applicant
             try
             {
                 var applicantData = await _dashboardRepo.GetApplicantDetails(ApplicantID);
+                var applicantTrackData = await _dashboardRepo.GetApplicantStatusTrackDetails(ApplicantID);
 
-                Dictionary<string, object?> myRes = [];
+                return Ok(applicantTrackData);
+
+                /*Dictionary<string, object?> myRes = [];
                 myRes["ApplicationID"] = ApplicantID;
                 myRes["ApplicationName"] = applicantData?.ApplicantFname;
                 myRes["Status"] = "Registration Done";
@@ -44,7 +47,7 @@ namespace WbfsApi.Controllers.v1.applicant
                     ResponseData = myRes
                 };
 
-                return Ok(FinalResponse);
+                return Ok(FinalResponse);*/
             }catch (Exception ex)
             {
                 return BadRequest(new ApiResponse<string>
