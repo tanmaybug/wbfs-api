@@ -7,5 +7,6 @@ namespace WbfsApi.DAL.v1.IRepository.applicant
     {
         Task<WfsApplicationDetail?> GetApplicantDetails(String ApplicantID);
         Task<List<ApplicantStatusTrackResponseDTO>?> GetApplicantStatusTrackDetails(String ApplicantID);
+        Task<List<ApplicantStatusTrack>?> GetApplicantStatusTrackDetails2(String ApplicantID);
     }
 }

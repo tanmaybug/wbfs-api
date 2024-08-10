@@ -22,7 +22,7 @@ namespace WbfsApi.Controllers.v1.applicant
             try
             {
                 var applicantData = await _dashboardRepo.GetApplicantDetails(ApplicantID);
-                var applicantTrackData = await _dashboardRepo.GetApplicantStatusTrackDetails(ApplicantID);
+                var applicantTrackData = await _dashboardRepo.GetApplicantStatusTrackDetails2(ApplicantID);
 
                 return Ok(applicantTrackData);
 

@@ -43,5 +43,26 @@ namespace WbfsApi.DAL.v1.Repository.applicant
             }
             return result;
         }
+
+        public async Task<List<ApplicantStatusTrack>?> GetApplicantStatusTrackDetails2(String ApplicantID)
+        {
+            var query = @"
+            SELECT 
+                t.track_time,
+                s.status_id_pk,
+                s.description
+            FROM wfs_application_track_history as t join wfs_status_master as s 
+                on t.track_status=s.status_id_pk
+            WHERE t.wfs_registration_id_fk='WFS181551267173'
+            ORDER BY t.track_time";
+
+            var result = await _dbContext.Set<ApplicantStatusTrack>().FromSqlRaw(query).ToListAsync();
+
+            if (result == null)
+            {
+                return null;
+            }
+            return result;
+        }
     }
 }
