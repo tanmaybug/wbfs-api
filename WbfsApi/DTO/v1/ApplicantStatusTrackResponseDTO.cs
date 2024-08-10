@@ -1,5 +1,8 @@
-﻿namespace WbfsApi.DTO.v1
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WbfsApi.DTO.v1
 {
+    [Keyless]
     public class ApplicantStatusTrackResponseDTO
     {
         public long StatusID { get; set; }

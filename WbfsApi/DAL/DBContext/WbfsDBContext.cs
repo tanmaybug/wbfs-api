@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using WbfsApi.DAL.Entities;
+using WbfsApi.DTO.v1;
 
 namespace WbfsApi.DAL.DBContext;
 
@@ -83,6 +84,8 @@ public partial class WbfsDBContext : DbContext
     public virtual DbSet<WfsVerificationDetailsBack1112> WfsVerificationDetailsBack1112s { get; set; }
 
     public virtual DbSet<WfsVerificationDetailsBackup> WfsVerificationDetailsBackups { get; set; }
+
+    public DbSet<ApplicantStatusTrackResponseDTO> ApplicantStatusTrackResponses { get; set; }
 
 
     /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
