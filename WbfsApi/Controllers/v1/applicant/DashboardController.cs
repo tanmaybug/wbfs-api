@@ -9,7 +9,7 @@ namespace WbfsApi.Controllers.v1.applicant
     [ApiController]
     public class DashboardController : ControllerBase
     {
-        private readonly String ApplicantID = "WBFS2121";
+        private readonly String ApplicantID = "WFS181551267173";
         private readonly IDashboardRepository _dashboardRepo;
         public DashboardController(IDashboardRepository dashboardRepo) 
         {
@@ -24,20 +24,21 @@ namespace WbfsApi.Controllers.v1.applicant
                 var applicantData = await _dashboardRepo.GetApplicantDetails(ApplicantID);
                 var applicantTrackData = await _dashboardRepo.GetApplicantStatusTrackDetails2(ApplicantID);
 
-                return Ok(applicantTrackData);
+                //return Ok(applicantTrackData);
 
-                /*Dictionary<string, object?> myRes = [];
+                Dictionary<string, object?> myRes = [];
                 myRes["ApplicationID"] = ApplicantID;
-                myRes["ApplicationName"] = applicantData?.ApplicantFname;
+                myRes["ApplicantName"] = applicantData?.ApplicantFname +" "+ applicantData?.ApplicantLname;
+                myRes["ApplicationStatusTrack"] = applicantTrackData;
                 myRes["Status"] = "Registration Done";
 
-                Dictionary<string, string?> Activityinfo = [];
+                /*Dictionary<string, string?> Activityinfo = [];
                 Activityinfo["ApplicantRegistration"] = "01-01-2024";
                 Activityinfo["ApplicationFormFillup"] = "01-01-2024";
                 Activityinfo["UploadSupportingDocument"] = null;
                 Activityinfo["FinalSubmissionofApplication"] = null;
 
-                myRes["Activity"] = Activityinfo;
+                myRes["Activity"] = Activityinfo;*/
 
                 var FinalResponse = new ApiResponse<object>
                 {
@@ -47,7 +48,7 @@ namespace WbfsApi.Controllers.v1.applicant
                     ResponseData = myRes
                 };
 
-                return Ok(FinalResponse);*/
+                return Ok(FinalResponse);
             }catch (Exception ex)
             {
                 return BadRequest(new ApiResponse<string>
